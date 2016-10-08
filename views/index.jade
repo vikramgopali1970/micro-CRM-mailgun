@@ -25,8 +25,10 @@ html
         .col-xs-12
           .col-md-4(ng-repeat='(key,value) in userlist')
             ul.list-group
+              li.list-group-item.set-center {{value.catagory.toUpperCase()}}
               li.list-group-item(ng-repeat='(key,value1) in value.users')
                 span.badge {{value1.email}}
                 | {{value1.fname}}
+              button.list-group-item.list-group-item-action(type='button') Send Mail
     script(src='https://ajax.googleapis.com/ajax/libs/angularjs/1.5.6/angular.min.js')
     script(src='javascripts/indexApp.js')
