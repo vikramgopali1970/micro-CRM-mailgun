@@ -1,9 +1,9 @@
 doctype html
 html
   head
+    title
     link(rel='stylesheet', type='text/css', href='stylesheets/bootstrap.css')
-    link(rel='stylesheet', type='text/css', href='stylesheets/dashBoard.css')
-  body(ng-app='myApp', ng-controller='parentCtrll')
+  body(ng-app='myApp1', ng-controller='createlistctrllr')
     section#section-first
       nav.navbar.navbar-default
         .container-fluid
@@ -20,16 +20,16 @@ html
                 a(href='/createList') Create List
           // /.navbar-collapse
         // /.container-fluid
-    section#section-second
-      .row
-        .col-xs-12
-          .col-md-4(ng-repeat='(key,value) in userlist')
-            ul.list-group
-              li.list-group-item.set-center {{value.catagory.toUpperCase()}}
-              li.list-group-item(ng-repeat='(key,value1) in value.users')
-                span.badge {{value1.email}}
-                | {{value1.fname}}
-              button.list-group-item.list-group-item-action(type='button', ng-click='sendmail()') Send Mail
+    .row
+      .col-md-6.col-md-offset-3
+        ul.list-group
+          li.list-group-item(ng-repeat='(key,value) in items')
+            span.badge {{value.email}}
+            | {{value.fname}}
+          input.form-control(type='text', placeholder="Recipient's username", aria-describedby='basic-addon2', ng-model='newItemName')
+          input.form-control(type='text', placeholder="Recipient's email", aria-describedby='basic-addon2', ng-model='newItemEmail')
+          input.form-control(type='text', placeholder="Recipient's catagory", aria-describedby='basic-addon2', ng-model='newItemCatagory')
+          button(ng-click='addItem()') Add Me
     script(src='https://ajax.googleapis.com/ajax/libs/angularjs/1.5.6/angular.min.js')
     script(src='http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js')
-    script(src='javascripts/indexApp.js')
+    script(src='javascripts/createlistApp.js')
