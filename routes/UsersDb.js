@@ -132,6 +132,10 @@ var Club  = mongoose.model('Club',clubSchema);
 
 ];*/
 
+
+
+
+
 /*Club.collection.insertMany(data, function(err,r){
     assert.equal(null, err);
     assert.equal(data.length, r.insertedCount);

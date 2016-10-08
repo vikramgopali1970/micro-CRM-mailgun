@@ -4,15 +4,36 @@
 
 var app = angular.module('myApp', []);
 
-/*app.config(function($routeProvider){
-    $routeProvider
-        .when("/",{
-            templateUrl : 'index.html'
-        });
-});*/
+app.controller('parentCtrll', ['$scope', '$http', '$q', function($scope,$http,$q){
+    $scope.lists = [];
+    $scope.userlist = [];
+    var promises= [];
+        $http.get('/getCatagories',{}).success(function(results){
+            console.log(results.catagories);
+            $scope.lists = results.catagories;
+        }).error(function(err){
+            console.log('error');
+        }).then(function(){
+        console.log('cheking here'+$scope.lists);
+            angular.forEach($scope.lists, function(items){
+               console.log('print aagu '+items)
+               promises.push($http.get('/catatgoryUsers',{params: {catagory: items}}).success(function(results){
+                   console.log(results.catagoryusers);
+                   $scope.userlist.push({'catagory':items,'users':results.catagoryusers});
 
-app.controller('parentCtrll', ['$scope', '$http', function($scope,$http){
-    $http.get('/.json',{}).success(function (result) {
+               }).error(function(err){
+                   console.log('errorr');
+               }))
+            });
+            $q.all(promises).then(function(data){
+                //Never gets call
+                //console.log($scope.userlist)
+            });
+        });
+
+
+
+    /*$http.get('/.json',{}).success(function (result) {
         $scope.lists = [];
         $scope.free = [];
         $scope.premium = [];
@@ -36,5 +57,5 @@ app.controller('parentCtrll', ['$scope', '$http', function($scope,$http){
         })
     }).error(function (err) {
         console.log('error');
-    });
+    });*/
 }]);
