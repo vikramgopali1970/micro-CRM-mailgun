@@ -5,6 +5,38 @@
 var app = angular.module('myApp', []);
 
 app.controller('parentCtrll', ['$scope', '$http', '$q', function($scope,$http,$q){
+
+    $scope.sendmail = function(){
+
+        $http.post('/', {}).success(function(result){
+            console.success();
+        }).error(function(err){
+            console.log('error')
+        });
+        /*var settings = {
+            "async": true,
+            "crossDomain": true,
+            "url": "https://api.mailgun.net/v3/sandbox224fba4d033a4162906e00f11ce13aed.mailgun.org/messages",
+            "method": "POST",
+            "headers": {
+                "content-type": "application/x-www-form-urlencoded",
+                "authorization": "Basic YXBpOmtleS00NDFjM2JiNDdlMWFmMzUxOGRhODgxNTRjZmUzNTI3ZA==",
+                "cache-control": "no-cache",
+                "postman-token": "59d955cc-d07f-7b83-c8fd-fba851e53a4f"
+            },
+            "data": {
+                "to": "vikramgopali.93@gmail.com",
+                "from": "Excited User <mailgun@sandbox224fba4d033a4162906e00f11ce13aed.mailgun.org>",
+                "text": "this is a testing mail from mailgun server",
+                "subject": "testing mail"
+            }
+        }
+
+        $.ajax(settings).done(function (response) {
+            console.log(response);
+        });*/
+    }
+
     $scope.lists = [];
     $scope.userlist = [];
     var promises= [];
