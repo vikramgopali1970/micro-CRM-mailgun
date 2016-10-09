@@ -23,13 +23,20 @@ html
     .row
       .col-md-6.col-md-offset-3
         ul.list-group
-          li.list-group-item(ng-repeat='(key,value) in items')
-            span.badge {{value.email}}
-            | {{value.fname}}
           input.form-control(type='text', placeholder="Recipient's username", aria-describedby='basic-addon2', ng-model='newItemName')
           input.form-control(type='text', placeholder="Recipient's email", aria-describedby='basic-addon2', ng-model='newItemEmail')
           input.form-control(type='text', placeholder="Recipient's catagory", aria-describedby='basic-addon2', ng-model='newItemCatagory')
           button(ng-click='addItem()') Add Me
+      section#section-second
+        .row
+          .col-xs-12
+            .col-md-4(ng-repeat='(key,value) in catagoryArry')
+              ul.list-group
+                li.list-group-item.set-center {{value.catagory.toUpperCase()}}
+                li.list-group-item(ng-repeat='(key,value1) in value.usersArray | filter:value.catagory')
+                  span.badge {{value1.email}}
+                  | {{value1.fname}}
+                button.list-group-item.list-group-item-action(type='button', ng-click='savelist()') Save this List
     script(src='https://ajax.googleapis.com/ajax/libs/angularjs/1.5.6/angular.min.js')
     script(src='http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js')
     script(src='javascripts/createlistApp.js')
