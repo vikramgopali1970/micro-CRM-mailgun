@@ -12,27 +12,15 @@ app.controller('createlistctrllr',['$http', '$scope' , '$q', function ($http, $s
     $scope.savelist = function(UserCatagory){
 
         console.log(UserCatagory);
-        /*$http.get('/createuserSave', {params:{catagory:UserCatagory}}).success(function(response){
-            console.log("yuppie success")
-        }).error(function (err) {
-            console.log('error');
-        })*/
+        console.log(map);
+        $http.get('/createlist/createuserSave',{params: {catagory: UserCatagory, userlist: $scope.items}}).success(function(results){
+            //console.log(results.catagoryusers);
+            console.log(results.success);
+            //$scope.userlist.push({'catagory':items,'users':results.catagoryusers});
 
-            /*promises.push(*/
-                console.log(map);
-                $http.get('/createlist/createuserSave',{params: {catagory: UserCatagory, userlist: $scope.items}}).success(function(results){
-                    //console.log(results.catagoryusers);
-                    console.log(results.success);
-                    //$scope.userlist.push({'catagory':items,'users':results.catagoryusers});
-
-                }).error(function(err){
-                    console.log('error has occured');
-                });
-            /*)*/
-       /* $q.all(promises).then(function(data){
-            //Never gets call
-            //console.log($scope.userlist)
-        });*/
+        }).error(function(err){
+            console.log('error has occured');
+        });
     }
     $scope.addItem = function () {
         console.log($scope.newItemName,$scope.newItemEmail)
@@ -55,12 +43,6 @@ app.controller('createlistctrllr',['$http', '$scope' , '$q', function ($http, $s
         if($scope.catagoryArry.length == 0){
             $scope.catagoryArry.push({'catagory' : $scope.newItemCatagory, 'usersArray':$scope.items});
         }else{
-            /*for(var i=0;i<$scope.catagoryArry.length;i++){
-                if($scope.catagoryArry.catagory == $scope.newItemCatagory){
-                    flag = true;
-                    break;
-                }
-            }*/
             angular.forEach($scope.catagoryArry, function(item){
                 if(item.catagory == $scope.newItemCatagory){
                     flag = true;

@@ -4,7 +4,7 @@ var router = express.Router();
 var qs = require("querystring");
 var http = require("https");
 
-router.post('')
+
 
 router.post('/', function(req, res, next) {
   console.log('entered the post req')
@@ -40,7 +40,8 @@ router.post('/', function(req, res, next) {
     subject: 'testing mail' }));
   req.end();
 
-
+  res.status(200);
+  res.json({success: true});
 });
 
 /* GET home page. */

@@ -28,10 +28,6 @@ var clubSchema = new Schema({
             type:String,
             require:true
         },
-        mnumber:{
-            type: Number,
-            required:true,
-        },
         catagory:{
             type : String,
             required:false
