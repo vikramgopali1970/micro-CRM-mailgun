@@ -16,6 +16,12 @@ router.get('/createuserSave', function(req, res, next){
       dbpushUsers.push(JSON.parse(val));
     }
   });
+  console.log(dbpushUsers.length);
+  console.log('newly added rows',dbpushUsers.length-length);
+
+  if(length != 0 && dbpushUsers.length-length > 0){
+    console.log('coming here');
+  }
   console.log('did this print',dbpushUsers);
 
   dbpushUsers.forEach(function(userItem){
@@ -28,7 +34,8 @@ router.get('/createuserSave', function(req, res, next){
         resolve();
       });
     });
-  })
+    length = dbpushUsers.length;
+  });
 
   /*return new Promise(function(resolve, reject){
     Club.collection.insertMany(dbpushUsers, function(err,r){

@@ -12,7 +12,7 @@ app.controller('createlistctrllr',['$http', '$scope' , '$q', function ($http, $s
     $scope.savelist = function(UserCatagory){
 
         console.log(UserCatagory);
-        console.log(map);
+        console.log('problem',map,$scope.items);
         $http.get('/createlist/createuserSave',{params: {catagory: UserCatagory, userlist: $scope.items}}).success(function(results){
             //console.log(results.catagoryusers);
             console.log(results.success);
@@ -52,8 +52,8 @@ app.controller('createlistctrllr',['$http', '$scope' , '$q', function ($http, $s
             if(!flag){
                 $scope.catagoryArry.push({'catagory' : $scope.newItemCatagory, 'usersArray':$scope.items});
             }
-            console.log($scope.items)
         }
+        console.log('hahaha',$scope.items,map)
 
 
 
