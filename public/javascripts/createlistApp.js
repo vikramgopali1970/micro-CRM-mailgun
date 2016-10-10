@@ -5,15 +5,14 @@ var app = angular.module('myApp1', []);
 var i = 0;
 app.controller('createlistctrllr',['$http', '$scope' , '$q', function ($http, $scope, $q) {
     $scope.items = [];
-    var map = new Object();
-    $scope.catagoryArry = [];
+
     var promises = [];
 
     $scope.savelist = function(UserCatagory){
 
         console.log(UserCatagory);
-        console.log('problem',map,$scope.items);
-        $http.get('/createlist/createuserSave',{params: {catagory: UserCatagory, userlist: $scope.items}}).success(function(results){
+        console.log($scope.obj[UserCatagory]);
+        $http.get('/createlist/createuserSave',{params: {userlist: $scope.obj[UserCatagory]}}).success(function(results){
             //console.log(results.catagoryusers);
             console.log(results.success);
             //$scope.userlist.push({'catagory':items,'users':results.catagoryusers});
@@ -23,38 +22,22 @@ app.controller('createlistctrllr',['$http', '$scope' , '$q', function ($http, $s
         });
     }
     $scope.addItem = function () {
-        console.log($scope.newItemName,$scope.newItemEmail)
-        var fnameStr='initial',lnameStr='string';
-        if($scope.newItemName.match(' ')){
-            fnameStr = $scope.newItemName.split(' ')[0];
-            console.log('fname is '+fnameStr)
-            lnameStr = $scope.newItemName.split(' ')[1];
-        }else{
-            fnameStr = $scope.newItemName;
-        }
+        var fnameStr=$scope.newItemName.substring(0,$scope.newItemName.indexOf(' ')),lnameStr=$scope.newItemName.substr($scope.newItemName.indexOf(' '),$scope.newItemName.length-1);
+        console.log(fnameStr,lnameStr);
         $scope.items.push({
-            fname: fnameStr,
-            lname: lnameStr,
+            fname: fnameStr.trim(),
+            lname: lnameStr.trim()  ,
             email: $scope.newItemEmail,
             catagory:$scope.newItemCatagory
         });
-        map[i++] = $scope.items[$scope.items.length-1];
-        var flag = false;
-        if($scope.catagoryArry.length == 0){
-            $scope.catagoryArry.push({'catagory' : $scope.newItemCatagory, 'usersArray':$scope.items});
-        }else{
-            angular.forEach($scope.catagoryArry, function(item){
-                if(item.catagory == $scope.newItemCatagory){
-                    flag = true;
-                    return;
-                }
-            })
-            if(!flag){
-                $scope.catagoryArry.push({'catagory' : $scope.newItemCatagory, 'usersArray':$scope.items});
-            }
-        }
-        console.log('hahaha',$scope.items,map)
 
+        $scope.obj = {};
+        angular.forEach($scope.items, function(item, i){
+           if(!$scope.obj[item.catagory])
+               $scope.obj[item.catagory] = [];
+            $scope.obj[item.catagory].push(item);
+        });
+        console.log($scope.obj);
 
 
     }

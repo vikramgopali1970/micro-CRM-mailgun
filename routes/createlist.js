@@ -10,40 +10,26 @@ router.get('/', function(req, res, next) {
 
 router.get('/createuserSave', function(req, res, next){
   var dbpushUsers = [];
+
   req.query.userlist.forEach(function(val){
-    if(JSON.parse(val).catagory == req.query.catagory){
-      console.log('need this now',JSON.parse(val).catagory,req.query.catagory)
       dbpushUsers.push(JSON.parse(val));
-    }
   });
   console.log(dbpushUsers.length);
   console.log('newly added rows',dbpushUsers.length-length);
 
-  if(length != 0 && dbpushUsers.length-length > 0){
-    console.log('coming here');
-  }
-  console.log('did this print',dbpushUsers);
 
   dbpushUsers.forEach(function(userItem){
-    var saveuser = new Club({fname:userItem.fname, lname:userItem.lname, email:userItem.email, catagory:userItem.catagory});
+  var saveuser = new Club({fname:userItem.fname, lname:userItem.lname, email:userItem.email, catagory:userItem.catagory});
 
-    return new Promise(function(resolve, reject) {
-      saveuser.save(function (err) {
-        if (err) throw err;
-        console.log('User saved successfully!');
-        resolve();
-      });
+  return new Promise(function(resolve, reject) {
+    saveuser.save(function (err) {
+      if (err) throw err;
+      console.log('User saved successfully!');
+      resolve();
     });
+  });
     length = dbpushUsers.length;
   });
-
-  /*return new Promise(function(resolve, reject){
-    Club.collection.insertMany(dbpushUsers, function(err,r){
-      console.log('inside save');
-      assert.equal(null, err);
-      assert.equal(dbpushUsers.length, r.insertedCount);
-    });
-  });*/
 
   res.json({success:true});
 });
