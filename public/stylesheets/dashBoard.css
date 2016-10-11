@@ -14,7 +14,16 @@
 }
 
 .set-center{
-    text-align: -webkit-center;
+
     background-color:#A9A9A9;
     font-weight: 900;
+}
+
+
+
+
+.delete-list{
+    font-size: 18px;
+    color: black;
+    text-align: end;
 }

@@ -2,6 +2,7 @@ doctype html
 html
   head
     link(rel='stylesheet', type='text/css', href='stylesheets/bootstrap.css')
+    link(rel='stylesheet', type='text/css', href='https://cdnjs.cloudflare.com/ajax/libs/ionicons/2.0.1/css/ionicons.css')
     link(rel='stylesheet', type='text/css', href='stylesheets/dashBoard.css')
   body(ng-app='myApp', ng-controller='parentCtrll')
     section#section-first
@@ -20,16 +21,25 @@ html
                 a(href='/createList') Create List
           // /.navbar-collapse
         // /.container-fluid
-    section#section-second
-      .row
-        .col-xs-12
-          .col-md-4(ng-repeat='(key,value) in userlist')
-            ul.list-group
-              li.list-group-item.set-center {{value.catagory.toUpperCase()}}
-              li.list-group-item(ng-repeat='(key,value1) in value.users')
-                span.badge {{value1.email}}
-                | {{value1.fname}}
-              button.list-group-item.list-group-item-action(type='button', ng-click='sendmail(value.catagory)') Send Mail
-    script(src='https://ajax.googleapis.com/ajax/libs/angularjs/1.5.6/angular.min.js')
+    section#section-second.container-fluid
+      .row.grid
+        .col-md-4.grid-item(ng-repeat='(key,value) in obj')
+          ul.list-group
+            li.list-group-item.set-center
+              | {{key.toUpperCase()}}
+              a.ion-trash-a.delete-list(ng-click='onDelete(key)')
+            li.list-group-item(ng-repeat='(key1,value1) in value')
+              span.badge {{value1.email}}
+              | {{value1.fname}}
+            button.list-group-item.list-group-item-action(type='button', ng-click='sendmail(key)') Send Mail
     script(src='http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js')
+    script(src='https://unpkg.com/masonry-layout@4.1/dist/masonry.pkgd.min.js')
+    script(src='https://ajax.googleapis.com/ajax/libs/angularjs/1.5.6/angular.min.js')
     script(src='javascripts/indexApp.js')
+    script.
+      function setMasonry() {
+        $('.grid').masonry({
+          itemSelector: '.grid-item',
+          percentPosition: true
+        });
+      }

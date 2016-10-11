@@ -79,13 +79,19 @@ router.get('/getCatagories', function(req, res, next){
   
   var queryExe = getcataagories();
   queryExe.exec(function(err, resCatagories){
-   
-      /*console.log(resCatagories);
-      console.log(resCatagories.length);*/
       res.json({catagories:resCatagories});
   })
 });
 
+router.get('/deleteList', function (req, res, next) {
+  console.log('delete request',req.query.deletelist);
+
+  Club.remove({catagory:req.query.deletelist},function (err) {
+    if (err) throw err;
+
+    res.json({status:'success'});
+  })
+});
 
 router.get('/catatgoryUsers', function(req, res, next){
   console.log('look here bro '+req.query.catagory);
@@ -101,26 +107,5 @@ router.get('/catatgoryUsers', function(req, res, next){
     res.json({catagoryusers: resultsUsrCatagory})
   })
 
- /* function getcatagory(){
-    var query = Club.find({});
-    return query;
-  }
-  var free= [];
-  var premium = [];
-  var ultrapremium = [];*/
-
-  /*var q = getcatagory();
-  q.exec(function(err,results){
-    results.forEach(function(record){
-      if(record.catagory == 'free')
-        free.push(record);
-      else if (record.catagory == 'premium')
-        premium.push(record);
-      else
-        ultrapremium.push(record);
-    });
-    res.json({ststus:'success', free:free, premium:premium, ultrapremium:ultrapremium});
-    //console.log(premium,premium.length);
-  });*/
-})
+});
 module.exports = router;

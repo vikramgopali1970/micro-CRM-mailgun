@@ -14,7 +14,7 @@ router.get('/createuserSave', function(req, res, next){
   req.query.userlist.forEach(function(val){
       dbpushUsers.push(JSON.parse(val));
   });
-  console.log(dbpushUsers.length);
+  console.log('it is this',dbpushUsers.length);
   console.log('newly added rows',dbpushUsers.length-length);
 
 

@@ -22,7 +22,7 @@ var clubSchema = new Schema({
       },
         lname:{
             type : String,
-            required : true
+            required : false
         },
         email: {
             type:String,

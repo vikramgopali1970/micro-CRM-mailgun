@@ -37,7 +37,7 @@ html
                 li.list-group-item(ng-repeat='(key1,value1) in value')
                   span.badge {{value1.email}}
                   | {{value1.fname}}
-                button.list-group-item.list-group-item-action(type='button', ng-click='savelist(key)') Save this List
+                button.list-group-item.list-group-item-action(type='button', ng-click='savelist(key.toLowerCase())') Save this List
     script(src='https://ajax.googleapis.com/ajax/libs/angularjs/1.5.6/angular.min.js')
     script(src='http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js')
     script(src='javascripts/createlistApp.js')
