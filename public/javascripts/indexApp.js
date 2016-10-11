@@ -37,7 +37,7 @@ app.controller('parentCtrll', ['$scope', '$http', '$q', function($scope,$http,$q
         $scope.messageBody = $('.message-body').val();
         console.log('mail to be sent to ',mailCatagory, $scope.messageBody );
         $http.post('/', {sendCatagory : mailCatagory, message:$scope.messageBody}).success(function(result){
-            console.log(result.success);
+            console.log(result.status);
             console.log('mail sent');
         }).error(function(err){
             console.log('error')

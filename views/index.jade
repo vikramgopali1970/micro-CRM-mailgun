@@ -1,14 +1,14 @@
 doctype html
 html
   head
-    link(rel='stylesheet', type='text/css', href='stylesheets/bootstrap.css')
+    link(rel='stylesheet', type='text/css', href='https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700')
     link(rel='stylesheet', href='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css', integrity='sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u', crossorigin='anonymous')
     link(rel='stylesheet', href='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css', integrity='sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp', crossorigin='anonymous')
     link(rel='stylesheet', type='text/css', href='https://cdnjs.cloudflare.com/ajax/libs/ionicons/2.0.1/css/ionicons.css')
     link(rel='stylesheet', type='text/css', href='stylesheets/dashBoard.css')
   body(ng-app='myApp', ng-controller='parentCtrll')
     section#section-first
-      nav.navbar.navbar-default
+      nav.navbar.navbar-custom
         .container-fluid
           .navbar-header
             button.navbar-toggle.collapsed(type='button', data-toggle='collapse', data-target='#bs-example-navbar-collapse-1', aria-expanded='false')
@@ -29,11 +29,11 @@ html
           ul.list-group
             li.list-group-item.set-center
               | {{key.toUpperCase()}}
-              a.ion-trash-a.delete-list(ng-click='onDelete(key)')
+              a.ion-trash-a.delete-list.round-icon(ng-click='onDelete(key)')
+              a.ion-paper-airplane.send-mail-ionicon.round-icon(data-toggle='modal', ng-click='setKey(key)', data-target='#myModal')
             li.list-group-item(ng-repeat='(key1,value1) in value')
               span.badge {{value1.email}}
-              | {{value1.fname}}
-            button.list-group-item.list-group-item-action.btn.btn-primary.btn-lg(type='button', data-toggle='modal', ng-click='setKey(key)', data-target='#myModal') Send Mail
+              span.username {{value1.fname}}
     section#section-third-model
       // Modal
       #myModal.modal.fade(tabindex='-1', role='dialog', aria-labelledby='myModalLabel')
@@ -46,9 +46,9 @@ html
             .modal-body
               textarea.message-body(rows='20')
             .modal-footer
-              button.btn.btn-default(type='button', data-dismiss='modal' ng-click='clearBody()') Close
-              button.btn.btn-primary(type='button', ng-click='sendmail(mailingAddr)') Send Mail
-    script(src='http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js')
+              button.btn.btn-default(type='button', data-dismiss='modal', ng-click='clearBody()') Close
+              button.btn.btn-primary(type='button', data-dismiss='modal', ng-click='sendmail(mailingAddr)') Send Mail
+    script(src='https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js')
     script(src='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js', integrity='sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa', crossorigin='anonymous')
     script(src='https://unpkg.com/masonry-layout@4.1/dist/masonry.pkgd.min.js')
     script(src='https://ajax.googleapis.com/ajax/libs/angularjs/1.5.6/angular.min.js')

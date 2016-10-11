@@ -7,7 +7,11 @@ app.controller('createlistctrllr',['$http', '$scope' , function ($http, $scope) 
     $scope.items = [];
 
     var promises = [];
-
+    
+    $scope.setKeyVal = function (key) {
+        $scope.saveList  = key;
+    }
+    
     $scope.savelist = function(UserCatagory){
 
         console.log(UserCatagory);
