@@ -3,20 +3,18 @@
  */
 var app = angular.module('myApp1', []);
 var i = 0;
-app.controller('createlistctrllr',['$http', '$scope' , '$q', function ($http, $scope, $q) {
+app.controller('createlistctrllr',['$http', '$scope' , function ($http, $scope) {
     $scope.items = [];
 
     var promises = [];
 
     $scope.savelist = function(UserCatagory){
 
-        console.log(UserCatagory.toLowerCase());
-        console.log('is it undefined',$scope.obj , $scope.obj[UserCatagory.toLowerCase()]);
-        $http.get('/createlist/createuserSave',{params: {userlist: $scope.obj[UserCatagory.toLowerCase()]}}).success(function(results){
+        console.log(UserCatagory);
+        console.log('is it undefined',$scope.obj , $scope.obj[UserCatagory].length, typeof($scope.obj));
+        $http.get('/createlist/createuserSave',{params: {userlist: $scope.obj[UserCatagory]}}).success(function(results){
             //console.log(results.catagoryusers);
             console.log(results.success);
-            //$scope.userlist.push({'catagory':items,'users':results.catagoryusers});
-
         }).error(function(err){
             console.log('error has occured');
         });

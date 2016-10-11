@@ -10,11 +10,18 @@ router.get('/', function(req, res, next) {
 
 router.get('/createuserSave', function(req, res, next){
   var dbpushUsers = [];
+  console.log('ille nodripa iga',req.query.userlist, typeof(req.query.userlist));
 
-  req.query.userlist.forEach(function(val){
+  if(typeof(req.query.userlist) == 'string'){
+    console.log('it is string');
+    dbpushUsers.push(JSON.parse(req.query.userlist));
+  }else {
+    console.log('it is array of objects');
+    req.query.userlist.forEach(function (val) {
       dbpushUsers.push(JSON.parse(val));
-  });
-  console.log('it is this',dbpushUsers.length);
+    });
+  }
+  console.log('it is this',dbpushUsers.length, dbpushUsers);
   console.log('newly added rows',dbpushUsers.length-length);
 
 
