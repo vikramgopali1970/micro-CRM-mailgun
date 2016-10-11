@@ -18,12 +18,15 @@ HERE IS HOW TO RUN THIS:
         <node app.js>
 
 
+
 FEATURES IMPLEMENTED:
 
 * Pre defined list of users classified based on category to send the mail.
 * Option to create a list based on a category.
 * Before sending the mail, Edit the message body for custom message.
 * Delete a List.
+
+
 
 OTHERS:
 
