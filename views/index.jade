@@ -2,6 +2,8 @@ doctype html
 html
   head
     link(rel='stylesheet', type='text/css', href='stylesheets/bootstrap.css')
+    link(rel='stylesheet', href='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css', integrity='sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u', crossorigin='anonymous')
+    link(rel='stylesheet', href='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css', integrity='sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp', crossorigin='anonymous')
     link(rel='stylesheet', type='text/css', href='https://cdnjs.cloudflare.com/ajax/libs/ionicons/2.0.1/css/ionicons.css')
     link(rel='stylesheet', type='text/css', href='stylesheets/dashBoard.css')
   body(ng-app='myApp', ng-controller='parentCtrll')
@@ -31,10 +33,23 @@ html
             li.list-group-item(ng-repeat='(key1,value1) in value')
               span.badge {{value1.email}}
               | {{value1.fname}}
-            button#showarea.list-group-item.list-group-item-action(type='button', ng-click='sendmail(key)') Send Mail
-            textarea#textarea(name='text')
-            button#textarea-ok(name='ok', type='button', value='Ok')
-    script(src='http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js')
+            button.list-group-item.list-group-item-action.btn.btn-primary.btn-lg(type='button', data-toggle='modal', ng-click='setKey(key)', data-target='#myModal') Send Mail
+    section#section-third-model
+      // Modal
+      #myModal.modal.fade(tabindex='-1', role='dialog', aria-labelledby='myModalLabel')
+        .modal-dialog(role='document')
+          .modal-content
+            .modal-header
+              button.close(type='button', data-dismiss='modal', aria-label='Close')
+                span(aria-hidden='true') ×
+              h4#myModalLabel.modal-title Enter Message Body
+            .modal-body
+              textarea.message-body(rows='20')
+            .modal-footer
+              button.btn.btn-default(type='button', data-dismiss='modal' ng-click='clearBody()') Close
+              button.btn.btn-primary(type='button', ng-click='sendmail(mailingAddr)') Send Mail
+    script(src='http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js')
+    script(src='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js', integrity='sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa', crossorigin='anonymous')
     script(src='https://unpkg.com/masonry-layout@4.1/dist/masonry.pkgd.min.js')
     script(src='https://ajax.googleapis.com/ajax/libs/angularjs/1.5.6/angular.min.js')
     script(src='javascripts/indexApp.js')
@@ -45,10 +60,3 @@ html
           percentPosition: true
         });
       }
-      $("#textarea, #textarea-ok").hide(); // or you can have hidden w/ CSS
-      $("#showarea").click(function(){
-        $("#textarea").show();
-      });
-      $("#textarea-ok").click(function(){
-        $("#textarea").hide();
-      });

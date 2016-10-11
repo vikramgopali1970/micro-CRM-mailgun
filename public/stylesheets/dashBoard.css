@@ -19,7 +19,10 @@
     font-weight: 900;
 }
 
-
+.message-body{
+    width: 100%;
+    max-width: 100%;
+}
 
 
 .delete-list{

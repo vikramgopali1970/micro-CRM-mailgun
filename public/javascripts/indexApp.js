@@ -8,6 +8,15 @@ app.controller('parentCtrll', ['$scope', '$http', '$q', function($scope,$http,$q
 
     $scope.lists = [];
 
+    $scope.clearBody = function () {
+        $('.message-body').val("");
+    }
+
+    $scope.setKey = function (key) {
+        $scope.mailingAddr = key;
+        console.log($scope.mailingAddr, $scope.messageBody);
+    }
+
     $scope.onDelete = function(deleteList){
         console.log(deleteList);
 
@@ -25,8 +34,9 @@ app.controller('parentCtrll', ['$scope', '$http', '$q', function($scope,$http,$q
     }
 
     $scope.sendmail = function(mailCatagory){
-        console.log('mail to be sent to ',mailCatagory);
-        $http.post('/', {sendCatagory : mailCatagory}).success(function(result){
+        $scope.messageBody = $('.message-body').val();
+        console.log('mail to be sent to ',mailCatagory, $scope.messageBody );
+        $http.post('/', {sendCatagory : mailCatagory, message:$scope.messageBody}).success(function(result){
             console.log(result.success);
             console.log('mail sent');
         }).error(function(err){

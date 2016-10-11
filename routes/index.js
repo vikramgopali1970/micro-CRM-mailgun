@@ -13,7 +13,9 @@ router.post('/', function(req, res, next) {
     var q = Club.find({catagory : req.body.sendCatagory});
     return q;
   }
-
+  
+  var messageBody = req.body.message;
+  //console.log(messageBody);
   var toArray = [];
 
   var qryStr = getCatagoryUser();
@@ -22,10 +24,10 @@ router.post('/', function(req, res, next) {
     resCatagories.forEach(function(toUsr){
       toArray.push(toUsr.email);
     })
-    sendpah(toArray);
+    sendpah(toArray,messageBody);
   });
 
-  var sendpah = function(toAddr){
+  var sendpah = function(toAddr,messageBodyToBeSend){
     var options = {
       "method": "POST",
       "hostname": "api.mailgun.net",
@@ -52,11 +54,10 @@ router.post('/', function(req, res, next) {
         console.log(body.toString());
       });
     });
-
+    console.log('message to be sent is'+messageBodyToBeSend);
     req.write(qs.stringify({ to: toAddr,
       from: 'Excited User <mailgun@2mbrothers.com>',
-      text: 'this is a testing mail from mailgun server sent by Vikram Gopali. Guys if u get this mail just let me know. If u are reading this' +
-      'my code is working and reach out to me on whatssapp to confirm the reception of this mail',
+      text: messageBodyToBeSend,
       subject: 'from Vikram Gopali'  }));
     req.end();
   }
