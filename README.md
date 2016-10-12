@@ -17,6 +17,8 @@ HERE IS HOW TO RUN THIS:
 4) Run the Project
         <node app.js>
 
+5) Go to http://localhost:3020/ in browser
+
 
 
 FEATURES IMPLEMENTED:
